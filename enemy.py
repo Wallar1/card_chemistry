@@ -2,8 +2,6 @@ import math
 import random
 import uuid
 
-from utilities import slow_print
-
 
 class Enemy(object):
     def __init__(self, health=5, attack=1, speed=1, distance=3, traits={}, weaknesses={}, battle={}):

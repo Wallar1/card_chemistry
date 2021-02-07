@@ -1,0 +1,41 @@
+{
+    "python.pythonPath": "/Users/craigw/.virtualenvs/chemistry/bin/python3.8",
+    "editor.formatOnSave": true,
+    "workbench.colorTheme": "Github Light Theme - Gray",
+    "window.zoomLevel": 0,
+    "editor.rulers": [
+        120
+    ],
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wordWrapColumn": 120,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/*.pyc": {
+            "when": "$(basename).py"
+        },
+        "**/__pycache__": true
+    },
+    "python.formatting.provider": "yapf",
+    "python.formatting.yapfArgs": [
+        " — style",
+        "{based_on_style: flake8, indent_width: 4, column_limit: 200}"
+    ],
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python"
+    },
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": true,
+    "launch": {
+        "configurations": [],
+        "compounds": []
+    },
+    "python.linting.flake8Args": [
+        "--max-line-length=160",
+        // "--ignore=E402,F841,F401,E302,E305",
+    ],
+}

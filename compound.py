@@ -1,6 +1,18 @@
 from effects import Doom, Poison, Effect
 from utilities import slow_print
 
+"""
+Mercury: makes enemies crazy and attack each other
+Gold: grants 2 other attacks
+Silver: grants 1 other attack
+Lead: some doom damage
+Cyanide: poison
+Chlorine: poison
+Sodium: explodes on neighbors
+Calcium: makes player stronger
+Copper: electric shock that jumps from enemy to enemy 
+"""
+
 
 compound_to_damage_dict = {
     'H2': 2,
@@ -44,18 +56,6 @@ formula_to_name_dict = {
     'Mg': 'Mercury',
     'NaCl': 'Sodium Chloride (table salt)'
 }
-
-"""
-Mercury: makes enemies crazy and attack each other
-Gold: grants 2 other attacks
-Silver: grants 1 other attack
-Lead: some doom damage
-Cyanide: poison
-Chlorine: poison
-Sodium: explodes on neighbors
-Calcium: makes player stronger
-Copper: electric shock that jumps from enemy to enemy 
-"""
 
 
 class Compound(object):
