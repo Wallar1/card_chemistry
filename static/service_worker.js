@@ -26,8 +26,9 @@ self.addEventListener('install', function (event) {
 // can be used to update the service worker
 self.addEventListener('activate', (event) => {
     console.log('activating')
-    console.log(event)
-    caches.open('v1').then(cache => cache.keys().then(keys => console.log(keys)))
+    // workers dont immediately claim the sessions that load them, and require a refresh. However, this overrides that
+    // https://frontendian.co/service-workers
+    event.waitUntil(self.clients.claim());
     // var cacheKeeplist = ['v2'];
 
     // event.waitUntil(
@@ -45,11 +46,11 @@ self.addEventListener('activate', (event) => {
 // This is the event that is hijacked whenever a page with a service worker makes a fetch request
 // for some reason it only happens after you refresh the page while a worker is running
 self.addEventListener('fetch', function (event) {
+    console.log('intercepted request')
     if (event.request.method != 'GET') return;
     event.respondWith(caches.match(event.request).then(function (response) {
         // caches.match() always resolves
         // but in case of success response will have value
-        console.log(`response is ${response}`)
         if (response !== undefined) {
             return response;
         } else {

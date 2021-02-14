@@ -30,7 +30,6 @@
 
         function get_player() {
             let myRequest = new Request('/static/manifest.json');
-            fetch(myRequest).then((resp) => console.log('finished fetching player'))
             axios.get('/player')
                 .then(function (response) {
                     player = response['data']

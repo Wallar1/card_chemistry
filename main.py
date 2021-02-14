@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, send_file, make_response, send_from_directory
 
-# from player import Player
+from player import Player
 from scientist import ALL_SCIENTISTS
 
 
@@ -34,7 +34,7 @@ def scientists():
 
 @app.route('/player')
 def player():
-    return jsonify()
+    return jsonify(Player().toJSON())
 
 
 
