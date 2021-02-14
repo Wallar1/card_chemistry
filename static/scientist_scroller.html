@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Chemistry Game</title>
+    <meta name="description" content="Learn about the elements, compounds, and the history of chemistry">
+    <meta name="author" content="Craig Wallace">
+    <link rel="manifest" href='/static/manifest.json'>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <script>
+        // PWAs require a service worker, https, using the app twice, and have an app manifest
+        // by default the service worker can only control the scope at this level or below, so we raise the scope to get
+        // all fetch events
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register(href = '/service_worker.js', { scope: '/' })
+                .then((reg) => {
+                    // registration worked
+                    console.log('Registration succeeded. Scope is ' + reg.scope);
+                }).catch((error) => {
+                    // registration failed
+                    console.log('Registration failed with ' + error);
+                });
+        }
+
+
+        function get_player() {
+            let myRequest = new Request('/static/manifest.json');
+            fetch(myRequest).then((resp) => console.log('finished fetching player'))
+            axios.get('/player')
+                .then(function (response) {
+                    player = response['data']
+                })
+                .catch(function (error) {
+                    console.log(error)
+                })
+        }
+        // initial request to get the player
+        get_player()
+
+        // initial request for the scientist timeline on page load
+        axios.get(`/scientists`)
+            .then(function (response) {
+                // handle success
+                scientists_json = response['data']
+                all_scientists_el = document.getElementById('scientists')
+                scientists_json.forEach(scientist_json => {
+                    scientist_data = JSON.parse(scientist_json)
+                    const scientist_el = document.createElement("div");
+                    scientist_el.classList.add('scientist')
+                    const scientist_name_el = document.createElement("h3");
+                    scientist_name_el.innerText = scientist_data['name']
+                    const scientist_year_el = document.createElement('h4')
+                    scientist_year_el.innerText = scientist_data['year']
+                    const scientist_story_el = document.createElement("p");
+                    scientist_story_el.innerText = scientist_data['story']
+                    scientist_el.appendChild(scientist_name_el)
+                    scientist_el.appendChild(scientist_year_el)
+                    scientist_el.appendChild(scientist_story_el)
+                    scientist_el.addEventListener('click', (evt) => {
+                        get_player()
+                    })
+                    all_scientists_el.appendChild(scientist_el)
+                })
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+            .then(function () {
+                // always executed
+            });
+
+
+        function start_battle(scientist_name, player) {
+
+        }
+
+    </script>
+    <style>
+        #scientists {
+            display: flex;
+            flex-direction: row;
+            overflow-x: scroll;
+            padding: 50px;
+        }
+
+        .scientist {
+            display: flex;
+            flex-direction: column;
+            width: 200px;
+            min-width: 150px;
+            height: 300px;
+            overflow-y: scroll;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #44306d;
+            box-shadow: -1rem 0 3rem #000;
+            color: white;
+            transition-duration: .2s;
+            position: relative;
+        }
+
+        .scientist:not(:first-child) {
+            margin-left: -15px;
+        }
+
+        .scientist:hover {
+            transform: translateY(-1rem);
+            height: 400px;
+        }
+
+        .scientist:hover+.scientist {
+            box-shadow: 0 0 2rem #000;
+        }
+
+        .scientist:focus-within~.scientist,
+        .scientist:hover~.scientist {
+            transform: translateX(1rem);
+        }
+    </style>
+    <section class='scroller'>
+        <div id='scientists'>
+
+        </div>
+    </section>
+</body>
+
+</html>

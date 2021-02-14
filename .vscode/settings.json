@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "/Users/craigw/.virtualenvs/chemistry/bin/python3.8",
+    "python.pythonPath": "~/.virtualenvs/chemistry/bin/python3",
     "editor.formatOnSave": true,
     "workbench.colorTheme": "Github Light Theme - Gray",
     "window.zoomLevel": 0,
@@ -27,8 +27,8 @@
     "[python]": {
         "editor.defaultFormatter": "ms-python.python"
     },
-    "python.linting.pylintEnabled": false,
-    "python.linting.flake8Enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.flake8Enabled": false,
     "python.linting.enabled": true,
     "launch": {
         "configurations": [],

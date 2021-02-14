@@ -6,10 +6,10 @@ from compound import Compound
 from element import ElementFrequency, ELEMENT_PROBABILITIES
 from enemy import Enemy
 from instrument import Instrument
-from utilities import measure_performance, slow_print, least_common_multiple
+from utilities import measure_performance, slow_print, least_common_multiple, JsonSerializable
 
 
-class Player(object):
+class Player(JsonSerializable):
     """
     improvements could be new instrument (bunsen burner, condensor or something), new compound unlocks
     """

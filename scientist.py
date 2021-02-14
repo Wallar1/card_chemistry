@@ -1,9 +1,8 @@
-import json
-
 from heat import Heat
+from utilities import JsonSerializable
 
 
-class Scientist(object):
+class Scientist(JsonSerializable):
     """
     So each battle will be against a scientist, and they are summoning smaller enemies. 
     The smaller enemies are summoned every 5 turns, and you have to kill them before attacking the scientist.
@@ -21,14 +20,6 @@ class Scientist(object):
         self.year = year
         self.story = story
         self.heat = heat
-
-    # https://yzhong-cs.medium.com/serialize-and-deserialize-complex-json-in-python-205ecc636caa
-    def toJSON(self):
-        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
-
-    @classmethod
-    def fromJSON(cls, json_data):
-        return cls(**json_data)
 
 
 class Democritus(Scientist):

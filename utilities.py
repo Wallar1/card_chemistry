@@ -1,4 +1,17 @@
+import json
 import time
+
+
+class JsonSerializable(object):
+    # https://yzhong-cs.medium.com/serialize-and-deserialize-complex-json-in-python-205ecc636caa
+    def toJSON(self):
+        return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
+
+
+    @classmethod
+    def fromJSON(cls, json_data):
+        return cls(**json_data)
+
 
 
 def slow_print(text):

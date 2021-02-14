@@ -1,0 +1,9 @@
+{
+    "name": "Chemistry Attack",
+    "short_name": "ChemAtk",
+    "start_url": "/",
+    "display": "fullscreen",
+    "background_color": "#3E4EB8",
+    "theme_color": "#2F3BA2",
+    "description": "A chemistry card game, building compounds to defeat famous scientists."
+}

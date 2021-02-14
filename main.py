@@ -1,5 +1,4 @@
-# import os
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, send_file, make_response, send_from_directory
 
 # from player import Player
 from scientist import ALL_SCIENTISTS
@@ -10,7 +9,20 @@ app = Flask(__name__)
 
 @app.route('/')
 def home_page():
-    return render_template('scientist_scroller.html')
+    return send_file('./static/scientist_scroller.html')
+
+
+@app.route('/service_worker.js')
+def service_worker():
+    """
+    Normally this would just be served directly from the static directly where it lives. But we need to add this 
+    'Service-Worker-Allowed' header so that the worker can have access to all requests. That way we can cache all pages
+    """
+    response = make_response(send_from_directory('static',filename='service_worker.js'))
+    #change the content header file
+    response.headers['Content-Type'] = 'application/javascript'
+    response.headers['Service-Worker-Allowed'] = '/'
+    return response
 
 
 @app.route('/scientists')
@@ -20,14 +32,9 @@ def scientists():
     return jsonify(scientists_json)
 
 
-# @app.route('/')
-# def index():
-#     return 'Index Page'
-
-
-# @app.route('/')
-# def index():
-#     return 'Index Page'
+@app.route('/player')
+def player():
+    return jsonify()
 
 
 
